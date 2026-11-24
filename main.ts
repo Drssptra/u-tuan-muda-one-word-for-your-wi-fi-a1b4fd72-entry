@@ -7,6 +7,12 @@ import { join } from "node:path";
 // it feels like it. A network name it would be proud of.
 const word = "Diva";
 
+// Guard: never write an empty or whitespace-only entry.
+if (word.trim().length === 0) {
+  console.error("entry word must not be empty");
+  process.exit(1);
+}
+
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, "entry.txt"), word, "utf8");
